@@ -21,4 +21,12 @@ public class PlayerController : MonoBehaviour
         //transform.position += speed * Time.deltaTime * Vector3.ProjectOnPlane(direction,Vector3.up);
         characterController.Move(speed * Time.deltaTime * Vector3.ProjectOnPlane(direction,Vector3.up));
     }
+	
+	void OnCollisionEnter(Collision collision){
+	if(collision.transform.name == "Sphere"){
+		//Destroy(gameObject);
+		Debug.Log("hit ball");
+	}
+}
+
 }
