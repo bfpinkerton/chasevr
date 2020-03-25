@@ -38,4 +38,11 @@ public class randomMove : MonoBehaviour
 
         nav.SetDestination(target);
     }
+	void OnCollisionEnter(Collision collision){
+		if(collision.transform.name == "Player"){
+			HealthCounter.healthCounter = HealthCounter.healthCounter - 1;
+			Debug.Log("PlayerController.lives.ToString()");
+			
+		}
+	}
 }

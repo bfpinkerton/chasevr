@@ -19,7 +19,7 @@ public class pellet_behavior : MonoBehaviour
 	void OnCollisionEnter(Collision collision){
 	if(collision.transform.name == "Player"){
 		Destroy(gameObject);
-		Debug.Log("Sphere hit");
+		//Debug.Log("Sphere hit");
 		Score.gameScore +=10;
 	}
 }
