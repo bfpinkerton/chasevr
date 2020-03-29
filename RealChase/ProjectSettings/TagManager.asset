@@ -6,6 +6,8 @@ TagManager:
   tags:
   - projectile
   - FxTemporaire
+  - Enemy
+  - NavNode
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - 
   - Pellets
   - Chasers
-  - 
+  - NavNodes
   - 
   - 
   - 

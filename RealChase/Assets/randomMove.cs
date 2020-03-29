@@ -20,24 +20,28 @@ public class randomMove : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-
+        //newTarget();
         if(timer >= newtarget){
-            newTarget();
+            //newTarget();
             timer = 0;
         }
     }
 
-    void newTarget(){
-        float myX = gameObject.transform.position.x;
-        float myZ = gameObject.transform.position.z;
+    void newTarget(Collider collision){
+        //float myX = gameObject.transform.position.x;
+        //float myZ = gameObject.transform.position.z;
 
-        float xPos = myX + Random.Range(myX - 100, myX + 100);
-        float zPos = myZ + Random.Range(myZ - 100, myZ + 100);
+        Vector3 nodeTarget = collision.GetComponent<NavNodes>().GetNext();
 
-        target = new Vector3(xPos, gameObject.transform.position.y, zPos);
+        //float xPos = myX + target.x;
+        //float zPos = myZ + target.z;
+
+        target = new Vector3(nodeTarget.x, gameObject.transform.position.y, 
+                            nodeTarget.z);
 
         nav.SetDestination(target);
     }
+    
 	void OnCollisionEnter(Collision collision){
 		if(collision.transform.name == "Player"){
 			HealthCounter.healthCounter = HealthCounter.healthCounter - 1;
@@ -45,4 +49,16 @@ public class randomMove : MonoBehaviour
 			
 		}
 	}
+
+    void OnTriggerEnter(Collider collision){
+        //if(collision.tag == "NavNode"){
+            //Debug.Log(collision.GetComponent<NavNodes>().GetPosition());
+            //Debug.Log(transform.position);
+        //}
+        if(collision.tag == "NavNode"){
+            newTarget(collision);
+        }
+        //target = collision.GetComponent<NavNodes>().GetNext();
+        //newTarget();
+    }
 }
