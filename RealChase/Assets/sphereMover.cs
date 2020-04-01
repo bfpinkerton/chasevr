@@ -48,5 +48,10 @@ public class sphereMover : MonoBehaviour
         if(collision.tag == "NavNode"){
             newTarget(collision);
         }
+        if(collision.tag == "HandColliderRight(Clone)"){
+			HealthCounter.healthCounter = HealthCounter.healthCounter - 1;
+			
+			
+		}
     }
 }
