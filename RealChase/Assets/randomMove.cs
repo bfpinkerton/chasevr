@@ -27,7 +27,7 @@ public class randomMove : MonoBehaviour
         }
     }
 
-    void newTarget(Collider collision){
+    /*void newTarget(Collider collision){
         //float myX = gameObject.transform.position.x;
         //float myZ = gameObject.transform.position.z;
 
@@ -40,7 +40,7 @@ public class randomMove : MonoBehaviour
                             nodeTarget.z);
 
         nav.SetDestination(target);
-    }
+    }*/
     
 	void OnCollisionEnter(Collision collision){
 		if(collision.transform.name == "Player"){
@@ -55,9 +55,9 @@ public class randomMove : MonoBehaviour
             //Debug.Log(collision.GetComponent<NavNodes>().GetPosition());
             //Debug.Log(transform.position);
         //}
-        if(collision.tag == "NavNode"){
-            newTarget(collision);
-        }
+        //if(collision.tag == "NavNode"){
+          //  newTarget(collision);
+        //}
         //target = collision.GetComponent<NavNodes>().GetNext();
         //newTarget();
     }
