@@ -18,26 +18,26 @@ public class NavNodes : MonoBehaviour
     void Update()
     {}
 
-    public Vector3 GetNext(bool start, int prevX, int prevZ, out bool update, out int currX, out int currZ){
-        currX = (int)ownPosition.x;
-        currZ = (int)ownPosition.z;
-        if(!start){
-            NavNodes[] options = new NavNodes[neighbors.Length-1];
-            int j = 0;
-            for(int i = 0; i < neighbors.Length; i++){
-                if((int)neighbors[i].ownPosition.x != prevX || (int)neighbors[i].ownPosition.z != prevZ){
-                    options[j] = neighbors[i];
-                    j += 1;
-                }
-            }
-            
-            update = false;
-            System.Random rndo = new System.Random();
-            int nextIndexI = rndo.Next(0,options.Length);
-            return options[nextIndexI].ownPosition;
+    public Vector3 GetDirection(NavNodes next){
+        int x = 0;
+        if(ownPosition.x > next.ownPosition.x){
+            x = -1;
         }
+        else if(ownPosition.x < next.ownPosition.x){
+            x = 1;
+        }
+        int z = 0;
+        if(ownPosition.z > next.ownPosition.z){
+            z = -1;
+        }
+        else if(ownPosition.z < next.ownPosition.z){
+            z = 1;
+        }
+        Vector3 direction = new Vector3(x, 0, z);
+        return direction;
+    }
 
-        update = false;
+    public Vector3 GetNext(){
         System.Random rnd = new System.Random();
         int nextIndex = rnd.Next(0,neighbors.Length);
         return neighbors[nextIndex].ownPosition;

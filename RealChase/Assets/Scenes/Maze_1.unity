@@ -12735,7 +12735,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 55.000004
+  field of view: 55
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -17620,8 +17620,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
-  prevX: 0
-  prevZ: 0
 --- !u!54 &848644997
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24893,8 +24891,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
-  prevX: 0
-  prevZ: 0
 --- !u!54 &1173686911
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -36967,8 +36963,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
-  prevX: 0
-  prevZ: 0
 --- !u!54 &1805841823
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -42994,8 +42988,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
-  prevX: 0
-  prevZ: 0
 --- !u!54 &2050770505
 Rigidbody:
   m_ObjectHideFlags: 0
