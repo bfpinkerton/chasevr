@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
         characterController.Move(speed * Time.deltaTime * Vector3.ProjectOnPlane(direction,Vector3.up));
     }
 	void OnTriggerEnter(Collider other){
-		Debug.Log(other.tag);
+		//Debug.Log(other.tag);
 	}
 	void OnCollisionEnter(Collision collision){	
 	}
