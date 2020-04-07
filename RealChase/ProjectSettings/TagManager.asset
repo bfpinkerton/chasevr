@@ -8,6 +8,8 @@ TagManager:
   - FxTemporaire
   - Enemy
   - NavNode
+  - tp1
+  - tp2
   layers:
   - Default
   - TransparentFX
