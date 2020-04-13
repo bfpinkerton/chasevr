@@ -12735,7 +12735,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 55
+  field of view: 55.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -17932,6 +17932,7 @@ MonoBehaviour:
   currX: 0
   currZ: 0
   personality: 0
+  timer: 0
 --- !u!54 &848644997
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -25207,7 +25208,8 @@ MonoBehaviour:
   prevZ: 0
   currX: 0
   currZ: 0
-  personality: 0
+  personality: 2
+  timer: 0
 --- !u!54 &1173686911
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -37377,7 +37379,8 @@ MonoBehaviour:
   prevZ: 0
   currX: 0
   currZ: 0
-  personality: 0
+  personality: 1
+  timer: 0
 --- !u!54 &1805841823
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -43407,7 +43410,8 @@ MonoBehaviour:
   prevZ: 0
   currX: 0
   currZ: 0
-  personality: 0
+  personality: 3
+  timer: 0
 --- !u!54 &2050770505
 Rigidbody:
   m_ObjectHideFlags: 0

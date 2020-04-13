@@ -7,45 +7,62 @@ using UnityEngine.AI;
 public class sphereMover : MonoBehaviour
 {
     NavMeshAgent nav;
-    //public float timer;
-    //public int newtarget;
-    //public float speed;
     public Vector3 target;
     public int prevX;
     public int prevZ;
     public int currX;
     public int currZ;
     public int personality;
+    int[] timers;
+    int[] lowtimers;
     bool start;
+    bool huntActive;
+    public float timer;
 
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
         start = true;
+        huntActive = false;
+        timers = new int[]{10,20,30,40};
+        lowtimers = new int[timers.Length];
+        lowtimers[0] = 0;
+        for(int i = 0; i < timers.Length-1; i++){
+            lowtimers[i+1] = timers[i];
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //timer += Time.deltaTime;
-        //if(timer >= newtarget){
-            //timer = 0;
-        //}
+        timer += Time.deltaTime;
+        if(timer >= 5 && !huntActive){
+            huntActive = true;
+        }
     }
 
     void newTarget(Collider collision){
         bool updateStart;
         Vector3 nodeTarget = collision.GetComponent<NavNodes>().GetNext(start, prevX, prevZ, personality, out updateStart, out currX, out currZ);
+        if(nodeTarget.x == 0 && nodeTarget.y == 0 && nodeTarget.z == 0){
+            return;
+        }
         start = updateStart;
         prevX = currX;
         prevZ = currZ;
 
-        if(nodeTarget.x == 0 && nodeTarget.y == 0 && nodeTarget.z == 0){
-            return;
-        }
-
         target = new Vector3(nodeTarget.x - 3.0f, gameObject.transform.position.y, 
                             nodeTarget.z- 29.3f);
+
+        nav.SetDestination(target);
+    }
+
+    void Hunt(Collider collision){
+        Vector3 nodeTarget = collision.GetComponent<NavNodes>().HuntNext(prevX, prevZ, personality, out currX, out currZ);
+        prevX = currX;
+        prevZ = currZ;
+
+        target = new Vector3(nodeTarget.x - 3.0f, gameObject.transform.position.y, nodeTarget.z- 29.3f);
 
         nav.SetDestination(target);
     }
@@ -60,7 +77,13 @@ public class sphereMover : MonoBehaviour
 
     void OnTriggerEnter(Collider collision){
         if(collision.tag == "NavNode"){
-            newTarget(collision);
+            int currTime = (int)timer % timers[timers.Length-1];
+            if(currTime >= lowtimers[personality] && currTime <= timers[personality] && huntActive){
+                Hunt(collision);
+            }
+            else{
+                newTarget(collision);
+            }
         }
         if(collision.tag == "HandColliderRight(Clone)"){
 			HealthCounter.healthCounter = HealthCounter.healthCounter - 1;

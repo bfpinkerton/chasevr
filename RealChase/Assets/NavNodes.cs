@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class NavNodes : MonoBehaviour
@@ -35,7 +36,7 @@ public class NavNodes : MonoBehaviour
                         Vector3 triggered = new Vector3(0,0,0);
                         return triggered;
                     }
-                    total += personality(enemyPerson, neighbors[i], prevX, prevZ);
+                    total += personality(enemyPerson, neighbors[i], currX, currZ);
                     opts[j] = total;
 
                     options[j] = neighbors[i];
@@ -59,36 +60,42 @@ public class NavNodes : MonoBehaviour
         return neighbors[nextIndex].ownPosition;
     }
 
-    public int personality(int enemy, NavNodes neighbor, int prevX, int prevZ){
+    public Vector3 HuntNext(int prevX, int prevZ, int personality, out int currX, out int currZ){
+        currX = (int)ownPosition.x;
+        currZ = (int)ownPosition.z;
+        return MinEuclidean((int)PlayerController.PlayerPosition.x + 3, (int)PlayerController.PlayerPosition.z + 30, prevX, prevZ);
+    }
+
+    public int personality(int enemy, NavNodes neighbor, int currX, int currZ){
         int total = 0;
         switch(enemy){
+            case 0:
+                if((int)neighbor.ownPosition.x > currX || (int)neighbor.ownPosition.z > currZ){
+                    total += 20;
+                }
+                else{
+                    total += 2;
+                }
+            break;
             case 1:
-                if((int)neighbor.ownPosition.x > prevX || (int)neighbor.ownPosition.z > prevZ){
-                    total += 10000;
+                if((int)neighbor.ownPosition.x < currX || (int)neighbor.ownPosition.z > currZ){
+                    total += 20;
                 }
                 else{
                     total += 2;
                 }
             break;
             case 2:
-                if((int)neighbor.ownPosition.x < prevX || (int)neighbor.ownPosition.z > prevZ){
-                    total += 10000;
+            if((int)neighbor.ownPosition.x < currX || (int)neighbor.ownPosition.z < currZ){
+                    total += 20;
                 }
                 else{
                     total += 2;
                 }
             break;
             case 3:
-            if((int)neighbor.ownPosition.x < prevX || (int)neighbor.ownPosition.z < prevZ){
-                    total += 10000;
-                }
-                else{
-                    total += 2;
-                }
-            break;
-            case 4:
-            if((int)neighbor.ownPosition.x > prevX || (int)neighbor.ownPosition.z < prevZ){
-                    total += 10000;
+            if((int)neighbor.ownPosition.x > currX || (int)neighbor.ownPosition.z < currZ){
+                    total += 20;
                 }
                 else{
                     total += 2;
@@ -98,6 +105,22 @@ public class NavNodes : MonoBehaviour
             break;
         }
         return total;
+    }
+
+    Vector3 MinEuclidean(int playerX, int playerZ, int prevX, int prevZ){
+
+        double min = 1000000000;
+        int index = 0;
+        for(int i = 0; i < neighbors.Length; i++){
+            if(prevX != (int)neighbors[i].ownPosition.x || prevZ != (int)neighbors[i].ownPosition.z){
+                double eucl = Math.Sqrt(Math.Pow((playerX - (int)neighbors[i].ownPosition.x),2) + Math.Pow((playerZ - (int)neighbors[i].ownPosition.z),2));
+                if(eucl < min){
+                    min = eucl;
+                    index = i;
+                }
+            }
+        }
+        return neighbors[index].ownPosition;
     }
 
     void OnTriggerEnter(Collider collision){
