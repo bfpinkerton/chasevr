@@ -14,7 +14,7 @@ public class HealthCounter : MonoBehaviour
         healthCounterText.text = "Lives: " + healthCounter.ToString();
 		
 		if(healthCounter <= 0){
-			SceneManager.LoadScene(1);
+			SceneManager.LoadScene(3);
 		}
     }
 }
