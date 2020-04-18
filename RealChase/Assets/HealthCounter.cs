@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HealthCounter : MonoBehaviour
 {
@@ -11,5 +12,9 @@ public class HealthCounter : MonoBehaviour
     void Update()
     {
         healthCounterText.text = "Lives: " + healthCounter.ToString();
+		
+		if(healthCounter <= 0){
+			SceneManager.LoadScene(1);
+		}
     }
 }

@@ -85,10 +85,5 @@ public class sphereMover : MonoBehaviour
                 newTarget(collision);
             }
         }
-        if(collision.tag == "HandColliderRight(Clone)"){
-			HealthCounter.healthCounter = HealthCounter.healthCounter - 1;
-			
-			
-		}
     }
 }
