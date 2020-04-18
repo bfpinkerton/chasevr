@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
+using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public SteamVR_Action_Vector2 input;
     public float speed = 1;
     private CharacterController characterController;
     public static Vector3 PlayerPosition;
+	public static Vector3 StartPosition;
+	GameObject PlayerObj;
     // Start is called before the first frame update
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+		StartPosition = transform.position;
+		Debug.Log(StartPosition);
     }
 
     // Update is called once per frame
@@ -24,7 +29,11 @@ public class PlayerController : MonoBehaviour
         PlayerPosition = transform.position;
     }
 	void OnTriggerEnter(Collider other){
-		Debug.Log(other.tag);
+		//Debug.Log(other.tag);
+		if(other.tag == "Enemy"){
+			HealthCounter.healthCounter = HealthCounter.healthCounter - 1;
+			
+		}
 	}
 	void OnCollisionEnter(Collision collision){	
 	}

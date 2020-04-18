@@ -22,6 +22,11 @@ public class pellet_behavior : MonoBehaviour
 		Debug.Log("Sphere hit");
 		Score.gameScore +=10;
 	}
+	if(collision.transform.name == "Player"){
+		Destroy(gameObject);
+		Debug.Log("Sphere hit");
+		Score.gameScore +=10;
+	}
 }
 
 }

@@ -412,5 +412,9 @@ namespace Valve.VR.InteractionSystem
 		{
 			//Do something appropriate here
 		}
+		
+		public void ChangePosition(Vector3 place){
+			transform.position = place;
+		}
 	}
 }
