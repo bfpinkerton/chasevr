@@ -22,6 +22,9 @@ public class pellet_behavior : MonoBehaviour
 		Debug.Log("Sphere hit");
 		Score.gameScore +=10;
 	}
+    if(collision.transform.name == "Bullet_45mm_Bullet(Clone)"){
+        Destroy(gameObject);
+    }
 }
 
 }
