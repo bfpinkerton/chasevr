@@ -20,15 +20,16 @@ public class HealthCounter : MonoBehaviour
 	
     void Update()
     {
-		Debug.Log(sphereCounter);
-        healthCounterText.text = "Lives: " + healthCounter.ToString();
+        healthCounterText.text = "LIVES: " + healthCounter.ToString();
 		
 		if(healthCounter <= 0){
-			SceneManager.LoadScene(3);
+			EndMessage.end = true;
+			EndMessage.mes = "GAME OVER";
 		}
 		if(sphereCounter >= 244){
 			PlayerPrefs.SetInt("win", 1);
-			SceneManager.LoadScene(3);
+			EndMessage.mes = "YOU WIN";
+			EndMessage.end = true;
 		}
     }
 }
