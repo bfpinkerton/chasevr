@@ -445,7 +445,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 653457515}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.177, y: 0.039, z: -0.1375122}
+  m_LocalPosition: {x: -0.245, y: 0.039, z: -0.1375122}
   m_LocalScale: {x: 0.1, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 80357982}
@@ -539,7 +539,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 898440888}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.123, y: -0.148, z: -0.1375122}
+  m_LocalPosition: {x: 0.133, y: -0.148, z: -0.1375122}
   m_LocalScale: {x: 0.1, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 80357982}
@@ -840,6 +840,7 @@ GameObject:
   - component: {fileID: 1643812607}
   - component: {fileID: 1643812609}
   - component: {fileID: 1643812608}
+  - component: {fileID: 1643812610}
   m_Layer: 0
   m_Name: Game Over
   m_TagString: Untagged
@@ -922,6 +923,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &1643812610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643812606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7844075cae895f241841a0aaaaccbcd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: {fileID: 1643812608}
 --- !u!1 &1665705267
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,7 +1055,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811263669}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.21800004, y: 0.26999998, z: -0.1375122}
+  m_LocalPosition: {x: -0.201, y: 0.26999998, z: -0.1375122}
   m_LocalScale: {x: 0.1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2080779570}
@@ -1055,7 +1069,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811263669}
-  m_Text: BACK TO MENU
+  m_Text: SUBMIT NAME
   m_OffsetZ: 0
   m_CharacterSize: 0.0625
   m_LineSpacing: 1

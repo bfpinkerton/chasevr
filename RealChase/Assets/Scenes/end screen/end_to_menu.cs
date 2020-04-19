@@ -8,21 +8,34 @@ public class end_to_menu : MonoBehaviour
 	public int finalScoreValue;
 	public int rank;
 	public bool is_high_score;
+	
+	public bool end;
+	public int frames;
+	
     // Start is called before the first frame update
     void Start()
     {
+		end = false;
+		frames = 0;
         
     }
 
     // Update is called once per frame
     void Update()
     {
+		if(end){
+			frames +=1;
+		}
 		
+		if(frames == 60){
+			SceneManager.LoadScene(1);
+		}
     }
 	
-	void OnCollisionEnter(Collision other){
+	void OnCollisionEnter(Collision collision){
 		
-		if(other.transform.name == "Player"){
+		if((collision.transform.name == "Player")||(collision.transform.name == "HeadCollider")||
+        (collision.transform.name == "HandColliderLeft(Clone)")||(collision.transform.name == "HandColliderRight(Clone)")){
 			finalScoreValue = PlayerPrefs.GetInt("active_score");
 			if(finalScoreValue > PlayerPrefs.GetInt("Score5")){
 				is_high_score = true;
@@ -31,7 +44,7 @@ public class end_to_menu : MonoBehaviour
 			else{
 				is_high_score = false;
 			}
-			SceneManager.LoadScene(1);
+			end = true;
 		}
 		
 	}
