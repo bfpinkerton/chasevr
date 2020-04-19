@@ -15,7 +15,7 @@ public class SimpleShoot : MonoBehaviour
 
     private Interactable interactable;
     public float shotPower = 100f;
-
+    public int bulletNumber = 3;
     void Start()
     {
         if (barrelLocation == null)
@@ -34,8 +34,9 @@ public class SimpleShoot : MonoBehaviour
         if(interactable.attachedToHand != null){
             SteamVR_Input_Sources source = interactable.attachedToHand.handType;
 
-            if(fireAction[source].stateDown){
+            if(fireAction[source].stateDown && bulletNumber > 0){
                 GetComponent<Animator>().SetTrigger("Fire");
+                bulletNumber--;
             }
         }
     }

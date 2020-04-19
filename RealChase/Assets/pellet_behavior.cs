@@ -17,16 +17,23 @@ public class pellet_behavior : MonoBehaviour
 	
 	void OnCollisionEnter(Collision collision){
     Debug.Log(collision.transform.name);
-	if(collision.transform.name == "HandColliderRight(Clone)"){
+	/*if(collision.transform.name == "HandColliderRight(Clone)"){
+		Destroy(gameObject);
+		Debug.Log("Sphere hit");
+		Score.gameScore +=10;
+	}*/
+
+    if((collision.transform.name == "Player")||(collision.transform.name == "HeadCollider")||
+        (collision.transform.name == "HandColliderLeft(Clone)")||(collision.transform.name == "HandColliderRight(Clone)")
+    ){
 		Destroy(gameObject);
 		Debug.Log("Sphere hit");
 		Score.gameScore +=10;
 	}
-	if(collision.transform.name == "Player"){
-		Destroy(gameObject);
-		Debug.Log("Sphere hit");
-		Score.gameScore +=10;
-	}
+
+    if(collision.transform.name == "Bullet_45mm_Bullet(Clone)"){
+        Destroy(gameObject);
+    }
 }
 
 }
