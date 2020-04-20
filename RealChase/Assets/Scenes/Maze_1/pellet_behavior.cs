@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class pellet_behavior : MonoBehaviour
 {
+	private bool hit;
     // Start is called before the first frame update
     void Start()
     {
+		hit = false;
     }
 
     // Update is called once per frame
@@ -26,13 +28,22 @@ public class pellet_behavior : MonoBehaviour
     if((collision.transform.name == "Player")||(collision.transform.name == "HeadCollider")||
         (collision.transform.name == "HandColliderLeft(Clone)")||(collision.transform.name == "HandColliderRight(Clone)")
     ){
-		Destroy(gameObject);
-		Debug.Log("Sphere hit");
-		Score.gameScore +=10;
+		if(!hit){
+			hit = true;
+			Destroy(gameObject);
+			Debug.Log("Sphere hit");
+			Score.gameScore +=10;
+			HealthCounter.sphereCounter +=1;
+		}
+		
 	}
 
     if(collision.transform.name == "Bullet_45mm_Bullet(Clone)"){
-        Destroy(gameObject);
+		if(!hit){
+			hit = true;
+			Destroy(gameObject);
+			HealthCounter.sphereCounter +=1;
+		}
     }
 }
 

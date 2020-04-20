@@ -12,6 +12,7 @@ public class Score : MonoBehaviour
 	
 	void Start(){
 		PlayerPrefs.SetInt("active_score", 0);
+		gameScore = 0;
 	}
 	
     void Update()
