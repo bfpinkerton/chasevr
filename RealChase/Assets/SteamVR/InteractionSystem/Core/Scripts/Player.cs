@@ -10,6 +10,8 @@ using System.Collections.Generic;
 
 namespace Valve.VR.InteractionSystem
 {
+	
+	
 	//-------------------------------------------------------------------------
 	// Singleton representing the local VR player/user, with methods for getting
 	// the player's hands, head, tracking origin, and guesses for various properties.
@@ -41,7 +43,6 @@ namespace Valve.VR.InteractionSystem
         public SteamVR_Action_Boolean headsetOnHead = SteamVR_Input.GetBooleanAction("HeadsetOnHead");
 
 		public bool allowToggleTo2D = true;
-
 
 		//-------------------------------------------------
 		// Singleton instance of the Player. Only one can exist at a time.
@@ -263,6 +264,7 @@ namespace Valve.VR.InteractionSystem
 		private IEnumerator Start()
 		{
 			_instance = this;
+			
 
             while (SteamVR.initializedState == SteamVR.InitializedStates.None || SteamVR.initializedState == SteamVR.InitializedStates.Initializing)
                 yield return null;
@@ -281,6 +283,7 @@ namespace Valve.VR.InteractionSystem
 
         protected virtual void Update()
         {
+			
             if (SteamVR.initializedState != SteamVR.InitializedStates.InitializeSuccess)
                 return;
 
@@ -413,8 +416,6 @@ namespace Valve.VR.InteractionSystem
 			//Do something appropriate here
 		}
 		
-		public void ChangePosition(Vector3 place){
-			transform.position = place;
-		}
+		
 	}
 }
