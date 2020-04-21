@@ -54,10 +54,10 @@ public class sphereMover : MonoBehaviour
         prevX = currX;
         prevZ = currZ;
 
-        target = new Vector3(nodeTarget.x - 3.0f, gameObject.transform.position.y, 
+        target = new Vector3(nodeTarget.x - 3.0f, gameObject.transform.position.y,
                             nodeTarget.z- 29.3f);
 
-        nav.SetDestination(target); 
+        nav.SetDestination(target);
     }
 
     void HuntNext(Collider collision){
@@ -78,12 +78,12 @@ public class sphereMover : MonoBehaviour
 
         nav.SetDestination(target);
     }
-    
+
 	void OnCollisionEnter(Collision collision){
 		if(collision.transform.name == "Player"){
 			HealthCounter.healthCounter = HealthCounter.healthCounter - 1;
 			Debug.Log("PlayerController.lives.ToString()");
-			
+
 		}
 	}
 
@@ -97,8 +97,5 @@ public class sphereMover : MonoBehaviour
                 newTarget(collision);
             }
         }
-        if(collision.tag == "HandColliderRight(Clone)"){
-			HealthCounter.healthCounter = HealthCounter.healthCounter - 1;
-		}
     }
 }
