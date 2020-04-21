@@ -42,6 +42,9 @@ public class sphereMover : MonoBehaviour
     }
 
     void newTarget(Collider collision){
+        if(prevX == (int)collision.GetComponent<NavNodes>().ownPosition.x && prevZ == (int)collision.GetComponent<NavNodes>().ownPosition.z){
+            return;
+        }
         bool updateStart;
         Vector3 nodeTarget = collision.GetComponent<NavNodes>().GetNext(start, prevX, prevZ, personality, out updateStart, out currX, out currZ);
         if(nodeTarget.x == 0 && nodeTarget.y == 0 && nodeTarget.z == 0){
@@ -54,11 +57,20 @@ public class sphereMover : MonoBehaviour
         target = new Vector3(nodeTarget.x - 3.0f, gameObject.transform.position.y, 
                             nodeTarget.z- 29.3f);
 
-        nav.SetDestination(target);
+        nav.SetDestination(target); 
     }
 
-    void Hunt(Collider collision){
-        Vector3 nodeTarget = collision.GetComponent<NavNodes>().HuntNext(prevX, prevZ, personality, out currX, out currZ);
+    void HuntNext(Collider collision){
+        if(prevX == (int)collision.GetComponent<NavNodes>().ownPosition.x && prevZ == (int)collision.GetComponent<NavNodes>().ownPosition.z){
+            return;
+        }
+
+        bool hunt = false;
+        if(personality % 2 == 0){
+            hunt = true;
+        }
+
+        Vector3 nodeTarget = collision.GetComponent<NavNodes>().HuntNext(prevX, prevZ, personality, hunt, out currX, out currZ);
         prevX = currX;
         prevZ = currZ;
 
@@ -79,7 +91,7 @@ public class sphereMover : MonoBehaviour
         if(collision.tag == "NavNode"){
             int currTime = (int)timer % timers[timers.Length-1];
             if(currTime >= lowtimers[personality] && currTime <= timers[personality] && huntActive){
-                Hunt(collision);
+                HuntNext(collision);
             }
             else{
                 newTarget(collision);
@@ -87,8 +99,6 @@ public class sphereMover : MonoBehaviour
         }
         if(collision.tag == "HandColliderRight(Clone)"){
 			HealthCounter.healthCounter = HealthCounter.healthCounter - 1;
-			
-			
 		}
     }
 }
