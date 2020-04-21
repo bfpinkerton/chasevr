@@ -18,9 +18,11 @@ public class sphereMover : MonoBehaviour
     bool start;
     bool huntActive;
     public float timer;
+    MeshRenderer mesh;
 
     void Start()
     {
+        mesh = GetComponent<MeshRenderer>();
         nav = GetComponent<NavMeshAgent>();
         start = true;
         huntActive = false;
@@ -87,7 +89,8 @@ public class sphereMover : MonoBehaviour
 
 		}
         if(collision.transform.name == "Bullet_45mm_Bullet(Clone)"){
-		    Destroy(gameObject);
+                gameObject.SetActive(false);
+                //Destroy(gameObject);
 	    }
 	}
 
