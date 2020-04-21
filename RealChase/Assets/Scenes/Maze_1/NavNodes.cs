@@ -17,7 +17,9 @@ public class NavNodes : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {}
+    {
+
+    }
 
     public Vector3 GetNext(bool start, int prevX, int prevZ, int enemyPerson, out bool update, out int currX, out int currZ){
         currX = (int)ownPosition.x;
@@ -60,10 +62,10 @@ public class NavNodes : MonoBehaviour
         return neighbors[nextIndex].ownPosition;
     }
 
-    public Vector3 HuntNext(int prevX, int prevZ, int personality, out int currX, out int currZ){
+    public Vector3 HuntNext(int prevX, int prevZ, int personality, bool hunt, out int currX, out int currZ){
         currX = (int)ownPosition.x;
         currZ = (int)ownPosition.z;
-        return MinEuclidean((int)PlayerController.PlayerPosition.x + 3, (int)PlayerController.PlayerPosition.z + 30, prevX, prevZ);
+        return Euclidean((int)PlayerController.PlayerPosition.x + 3, (int)PlayerController.PlayerPosition.z + 30, prevX, prevZ, hunt);
     }
 
     public int personality(int enemy, NavNodes neighbor, int currX, int currZ){
@@ -107,20 +109,35 @@ public class NavNodes : MonoBehaviour
         return total;
     }
 
-    Vector3 MinEuclidean(int playerX, int playerZ, int prevX, int prevZ){
+    Vector3 Euclidean(int playerX, int playerZ, int prevX, int prevZ, bool hunting){
 
         double min = 1000000000;
-        int index = 0;
+        double max = 0;
+        int minindex = 0;
+        int maxindex = 0;
         for(int i = 0; i < neighbors.Length; i++){
             if(prevX != (int)neighbors[i].ownPosition.x || prevZ != (int)neighbors[i].ownPosition.z){
-                double eucl = Math.Sqrt(Math.Pow((playerX - (int)neighbors[i].ownPosition.x),2) + Math.Pow((playerZ - (int)neighbors[i].ownPosition.z),2));
+                double eucl = CalcEuclidean(playerX, playerZ, (int)neighbors[i].ownPosition.x, (int)neighbors[i].ownPosition.z);
                 if(eucl < min){
                     min = eucl;
-                    index = i;
+                    minindex = i;
+                }
+                if(eucl > max){
+                    max = eucl;
+                    maxindex = i;
                 }
             }
         }
-        return neighbors[index].ownPosition;
+        if(hunting){
+            return neighbors[minindex].ownPosition;
+        }
+        else{
+            return neighbors[maxindex].ownPosition;
+        }
+    }
+
+    double CalcEuclidean(int x1, int z1, int x2, int z2){
+        return Math.Sqrt(Math.Pow((x1 - x2),2) + Math.Pow((z1 - z2),2));
     }
 
     void OnTriggerEnter(Collider collision){
