@@ -80,11 +80,15 @@ public class sphereMover : MonoBehaviour
     }
 
 	void OnCollisionEnter(Collision collision){
+        Debug.Log(collision.transform.name);
 		if(collision.transform.name == "Player"){
 			HealthCounter.healthCounter = HealthCounter.healthCounter - 1;
 			Debug.Log("PlayerController.lives.ToString()");
 
 		}
+        if(collision.transform.name == "Bullet_45mm_Bullet(Clone)"){
+		    Destroy(gameObject);
+	    }
 	}
 
     void OnTriggerEnter(Collider collision){

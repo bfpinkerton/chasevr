@@ -18,7 +18,7 @@ public class pellet_behavior : MonoBehaviour
     }
 	
 	void OnCollisionEnter(Collision collision){
-    Debug.Log(collision.transform.name);
+    //Debug.Log(collision.transform.name);
 	/*if(collision.transform.name == "HandColliderRight(Clone)"){
 		Destroy(gameObject);
 		Debug.Log("Sphere hit");
