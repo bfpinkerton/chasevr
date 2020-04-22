@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Valve.VR;
+using Valve.VR.InteractionSystem;
 public class Teleport : MonoBehaviour
 {
     public GameObject destination;
-
+	//public GameObject Player;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,10 +26,9 @@ public class Teleport : MonoBehaviour
         Transform player = other.transform.root;
         if (player.name == "Player")
         {
-            Transform camera = player.GetChild(1).GetChild(0);
-            //Debug.Log(player.GetChild(1).GetChild(0));
+			Player _instance = FindObjectOfType<Player>();
             player.GetComponent<CharacterController>().enabled = false;
-            camera.position = destination.transform.position;
+			_instance.trackingOriginTransform.position = destination.transform.position;
             player.GetComponent<CharacterController>().enabled = true;
         }
 
