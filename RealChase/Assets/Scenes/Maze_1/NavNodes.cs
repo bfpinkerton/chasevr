@@ -81,7 +81,7 @@ public class NavNodes : MonoBehaviour
         switch(enemy){
             case 0:
                 if((int)neighbor.ownPosition.x > currX || (int)neighbor.ownPosition.z > currZ){
-                    total += 20;
+                    total += 16;
                 }
                 else{
                     total += 2;
@@ -89,7 +89,7 @@ public class NavNodes : MonoBehaviour
             break;
             case 1:
                 if((int)neighbor.ownPosition.x < currX || (int)neighbor.ownPosition.z > currZ){
-                    total += 20;
+                    total += 16;
                 }
                 else{
                     total += 2;
@@ -97,7 +97,7 @@ public class NavNodes : MonoBehaviour
             break;
             case 2:
             if((int)neighbor.ownPosition.x < currX || (int)neighbor.ownPosition.z < currZ){
-                    total += 20;
+                    total += 16;
                 }
                 else{
                     total += 2;
@@ -105,7 +105,7 @@ public class NavNodes : MonoBehaviour
             break;
             case 3:
             if((int)neighbor.ownPosition.x > currX || (int)neighbor.ownPosition.z < currZ){
-                    total += 20;
+                    total += 16;
                 }
                 else{
                     total += 2;
