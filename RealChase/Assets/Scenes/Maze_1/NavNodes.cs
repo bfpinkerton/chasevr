@@ -28,24 +28,28 @@ public class NavNodes : MonoBehaviour
         if(!start){
             update = false;
             int total = 0;
+            // Build a target options array while excluding previous nav node
             NavNodes[] options = new NavNodes[neighbors.Length-1];
             int[] opts = new int[options.Length];
+
             int j = 0;
             for(int i = 0; i < neighbors.Length; i++){
+                //Exclude the nav node the neemy just came from
                 if((int)neighbors[i].ownPosition.x != prevX || (int)neighbors[i].ownPosition.z != prevZ){
                     if(j >= neighbors.Length - 1){
-                        //throw new Exception("Double Dip");
+                        //Sometimes the enemy hits a nav node multiple times in back to back frames and outofrange exceptions occurred
                         Vector3 triggered = new Vector3(0,0,0);
                         return triggered;
                     }
+                    //Call personality function to see what the weighting for this option is
                     total += personality(enemyPerson, neighbors[i], currX, currZ);
                     opts[j] = total;
-
                     options[j] = neighbors[i];
                     j += 1;
                 }
             }
             
+            //Pick a random next neighbor while taking into account the personality weighting
             System.Random rndo = new System.Random();
             int nextIndexI = rndo.Next(0,total);
              for(int i = 0; i < opts.Length; i++){
@@ -55,21 +59,25 @@ public class NavNodes : MonoBehaviour
             }
             return options[0].ownPosition;
         }
-
         update = false;
+
+        //Pick a random next neighbor without preference weighting
         System.Random rnd = new System.Random();
         int nextIndex = rnd.Next(0,neighbors.Length);
         return neighbors[nextIndex].ownPosition;
     }
 
-    public Vector3 HuntNext(int prevX, int prevZ, int personality, bool hunt, out int currX, out int currZ){
+    public Vector3 HuntNext(int prevX, int prevZ, int personality, out int currX, out int currZ){
+        //Get the next position that gets you closest to the player
         currX = (int)ownPosition.x;
         currZ = (int)ownPosition.z;
-        return Euclidean((int)PlayerController.PlayerPosition.x + 3, (int)PlayerController.PlayerPosition.z + 30, prevX, prevZ, hunt);
+        return Euclidean((int)PlayerController.PlayerPosition.x + 3, (int)PlayerController.PlayerPosition.z + 30, prevX, prevZ);
     }
 
     public int personality(int enemy, NavNodes neighbor, int currX, int currZ){
         int total = 0;
+        //Each personality prefers a different corner to patrol
+        // 0 prefers top right, 1 prefers top left, 2 prefers bottome left, 3 prefers bottom right
         switch(enemy){
             case 0:
                 if((int)neighbor.ownPosition.x > currX || (int)neighbor.ownPosition.z > currZ){
@@ -109,12 +117,11 @@ public class NavNodes : MonoBehaviour
         return total;
     }
 
-    Vector3 Euclidean(int playerX, int playerZ, int prevX, int prevZ, bool hunting){
+    Vector3 Euclidean(int playerX, int playerZ, int prevX, int prevZ){
 
         double min = 1000000000;
-        double max = 0;
         int minindex = 0;
-        int maxindex = 0;
+        // Go through the neighbors of the current nav node and choose the one that gets you closest to the player
         for(int i = 0; i < neighbors.Length; i++){
             if(prevX != (int)neighbors[i].ownPosition.x || prevZ != (int)neighbors[i].ownPosition.z){
                 double eucl = CalcEuclidean(playerX, playerZ, (int)neighbors[i].ownPosition.x, (int)neighbors[i].ownPosition.z);
@@ -122,18 +129,9 @@ public class NavNodes : MonoBehaviour
                     min = eucl;
                     minindex = i;
                 }
-                if(eucl > max){
-                    max = eucl;
-                    maxindex = i;
-                }
             }
         }
-        if(hunting){
-            return neighbors[minindex].ownPosition;
-        }
-        else{
-            return neighbors[maxindex].ownPosition;
-        }
+        return neighbors[minindex].ownPosition;
     }
 
     double CalcEuclidean(int x1, int z1, int x2, int z2){
