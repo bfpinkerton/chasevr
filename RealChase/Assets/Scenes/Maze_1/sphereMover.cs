@@ -41,7 +41,7 @@ public class sphereMover : MonoBehaviour
     {
         timer += Time.deltaTime;
         //Enemies do not start chasing until 5 seconds have passed
-        if(timer >= 5 && !huntActive){
+        if(timer >= 10 && !huntActive){
             huntActive = true;
         }
     }
@@ -54,7 +54,7 @@ public class sphereMover : MonoBehaviour
 
         bool updateStart;
         //NavNode function that returns the next target
-        Vector3 nodeTarget = collision.GetComponent<NavNodes>().GetNext(start, prevX, prevZ, personality, out updateStart, out currX, out currZ);
+        Vector3 nodeTarget = collision.GetComponent<NavNodes>().GetNext(start, prevX, prevZ, personality, huntActive, out updateStart, out currX, out currZ);
 
         //Prevents some outofrange exceptions that were occurring when a nav node is hit in back to back frames
         if(nodeTarget.x == 0 && nodeTarget.y == 0 && nodeTarget.z == 0){

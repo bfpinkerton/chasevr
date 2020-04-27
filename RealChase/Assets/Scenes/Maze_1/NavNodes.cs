@@ -21,7 +21,7 @@ public class NavNodes : MonoBehaviour
 
     }
 
-    public Vector3 GetNext(bool start, int prevX, int prevZ, int enemyPerson, out bool update, out int currX, out int currZ){
+    public Vector3 GetNext(bool start, int prevX, int prevZ, int enemyPerson, bool huntActive, out bool update, out int currX, out int currZ){
         currX = (int)ownPosition.x;
         currZ = (int)ownPosition.z;
 
@@ -33,6 +33,7 @@ public class NavNodes : MonoBehaviour
             int[] opts = new int[options.Length];
 
             int j = 0;
+            int piece;
             for(int i = 0; i < neighbors.Length; i++){
                 //Exclude the nav node the neemy just came from
                 if((int)neighbors[i].ownPosition.x != prevX || (int)neighbors[i].ownPosition.z != prevZ){
@@ -42,7 +43,14 @@ public class NavNodes : MonoBehaviour
                         return triggered;
                     }
                     //Call personality function to see what the weighting for this option is
-                    total += personality(enemyPerson, neighbors[i], currX, currZ);
+                    piece = personality(enemyPerson, neighbors[i], currX, currZ);
+                    //If hunt is not active yet (game has just started) then discourage enemies from moving closer to player
+                    if(!huntActive){
+                        piece = piece*( (int) ( 125 / CalcEuclidean((int)neighbors[i].ownPosition.x, (int)PlayerController.PlayerPosition.x + 3,
+                            (int)neighbors[i].ownPosition.z,(int)PlayerController.PlayerPosition.z + 30) ) );
+                    }
+
+                    total += piece;
                     opts[j] = total;
                     options[j] = neighbors[i];
                     j += 1;
@@ -81,34 +89,34 @@ public class NavNodes : MonoBehaviour
         switch(enemy){
             case 0:
                 if((int)neighbor.ownPosition.x > currX || (int)neighbor.ownPosition.z > currZ){
-                    total += 16;
+                    total += 24;
                 }
                 else{
-                    total += 2;
+                    total += 3;
                 }
             break;
             case 1:
                 if((int)neighbor.ownPosition.x < currX || (int)neighbor.ownPosition.z > currZ){
-                    total += 16;
+                    total += 24;
                 }
                 else{
-                    total += 2;
+                    total += 3;
                 }
             break;
             case 2:
             if((int)neighbor.ownPosition.x < currX || (int)neighbor.ownPosition.z < currZ){
-                    total += 16;
+                    total += 24;
                 }
                 else{
-                    total += 2;
+                    total += 3;
                 }
             break;
             case 3:
             if((int)neighbor.ownPosition.x > currX || (int)neighbor.ownPosition.z < currZ){
-                    total += 16;
+                    total += 24;
                 }
                 else{
-                    total += 2;
+                    total += 3;
                 }
             break;
             default:
