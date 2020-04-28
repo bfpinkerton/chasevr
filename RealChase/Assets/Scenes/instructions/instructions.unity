@@ -347,9 +347,9 @@ TextMesh:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 296171466}
   m_Text: "Collect\t\tto increase score - 10 points\n\nPick up Guns with 3 bullets
-    each from tables\n\nShoot\t  for 0 points\n\nShoot\t  to kill it permentantly\n\nIf
-    a \t  touches you, you lose a life\n\nLose 3 lives, and you lose\n\nCollect all
-    the \t and you win"
+    each from tables\n\nShoot\t  for 0 points\n\nShoot\t  to kill it permanently\n\nIf
+    a \t  touches you, you lose a life\n\nYou only have one life so make it count\n\nCollect
+    all the \t and you win"
   m_OffsetZ: 0
   m_CharacterSize: 0.0625
   m_LineSpacing: 1
@@ -1172,6 +1172,7 @@ MonoBehaviour:
   destination: {fileID: 0}
   hit: 0
   counter: 0
+  timer: 0
 --- !u!143 &1132874051
 CharacterController:
   m_ObjectHideFlags: 0
