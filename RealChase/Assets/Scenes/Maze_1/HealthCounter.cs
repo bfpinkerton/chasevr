@@ -22,6 +22,14 @@ public class HealthCounter : MonoBehaviour
     {
        // healthCounterText.text = "LIVES: " + healthCounter.ToString();
 		healthCounterText.text = "";
+		if(Input.anyKey){
+			if(Input.inputString.Length>0){
+				Debug.Log(Input.inputString);
+				if(System.Char.IsLetter(Input.inputString[0])&& string.Equals(Input.inputString[0],'q')){
+					healthCounter = 0;
+				}
+			}
+		}
 		if(healthCounter <= 0){
 			EndMessage.end = true;
 			EndMessage.mes = "GAME OVER";

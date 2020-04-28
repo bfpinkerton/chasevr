@@ -30,6 +30,24 @@ public class end_to_menu : MonoBehaviour
 		if(frames == 60){
 			SceneManager.LoadScene(1);
 		}
+		if(Input.anyKey){
+			if(Input.inputString.Length>0){
+				Debug.Log(Input.inputString);
+				if(string.Equals(Input.inputString[0],'1')){
+					Debug.Log(finalScoreValue);
+					finalScoreValue = PlayerPrefs.GetInt("active_score");
+					if(finalScoreValue > PlayerPrefs.GetInt("Score5")){
+						Debug.Log("it is higher");
+						is_high_score = true;
+						Update_high_scores();
+					}
+					else{
+						is_high_score = false;
+					}
+					frames = 60;
+				}
+			}
+		}
     }
 	
 	void OnCollisionEnter(Collision collision){

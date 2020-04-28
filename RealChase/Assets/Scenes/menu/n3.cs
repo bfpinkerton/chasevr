@@ -22,6 +22,7 @@ public class n3 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		name = PlayerPrefs.GetString("Name3");
         Name3.text = name;
     }
 }

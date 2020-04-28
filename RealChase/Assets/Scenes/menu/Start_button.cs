@@ -22,6 +22,24 @@ public class Start_button : MonoBehaviour
 				}
 			}
 		}
+		if(Input.anyKey){
+			if(Input.inputString.Length>0){
+				Debug.Log(Input.inputString);
+				if(System.Char.IsLetter(Input.inputString[0])&& string.Equals(Input.inputString[0],'r')){
+					PlayerPrefs.SetInt("Score1",0);
+					PlayerPrefs.SetInt("Score2",0);
+					PlayerPrefs.SetInt("Score3",0);
+					PlayerPrefs.SetInt("Score4",0);
+					PlayerPrefs.SetInt("Score5",0);
+					
+					PlayerPrefs.SetString("Name1","ABC");
+					PlayerPrefs.SetString("Name2","ABC");
+					PlayerPrefs.SetString("Name3","ABC");
+					PlayerPrefs.SetString("Name4","ABC");
+					PlayerPrefs.SetString("Name5","ABC");
+				}
+			}
+		}
     }
 	
 	void OnCollisionEnter(Collision collision){

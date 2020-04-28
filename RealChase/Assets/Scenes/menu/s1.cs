@@ -22,6 +22,7 @@ public class s1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		score = PlayerPrefs.GetInt("Score1");
         Score1.text = score.ToString();
     }
 }
