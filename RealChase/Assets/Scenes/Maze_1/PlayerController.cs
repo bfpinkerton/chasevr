@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 	public GameObject destination;
 	public bool hit;
 	public int counter;
+	public float timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		timer += Time.deltaTime;
 		Vector3 direction;
 		if(PlayerPrefs.GetInt("reset") == 1&&counter > 0){
 			Debug.Log("reset" + counter);
@@ -48,10 +50,11 @@ public class PlayerController : MonoBehaviour
     }
 	void OnTriggerEnter(Collider other){
 		//Debug.Log(other.tag);
-		if((other.tag == "Enemy") &  (PlayerPrefs.GetInt("reset") == 0)){
-			HealthCounter.healthCounter = HealthCounter.healthCounter - 1;
+		if((other.tag == "Enemy") &&  (PlayerPrefs.GetInt("reset") == 0) && (timer>3)){
 			PlayerPrefs.SetInt("reset",1);
+			HealthCounter.healthCounter = HealthCounter.healthCounter - 1;
 			counter = 5;
+			timer = 0;
 		}
 	}
 	
