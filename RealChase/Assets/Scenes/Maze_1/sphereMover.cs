@@ -26,7 +26,6 @@ public class sphereMover : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         start = true;
         huntActive = false;
-
         //Arrays to adjust at what time each personality will chase the player
         timers = new int[]{10,20,30,40};
         lowtimers = new int[timers.Length];

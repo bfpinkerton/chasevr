@@ -32,7 +32,6 @@ public class NavNodes : MonoBehaviour
             // Build a target options array while excluding previous nav node
             NavNodes[] options = new NavNodes[neighbors.Length-1];
             int[] opts = new int[options.Length];
-
             int j = 0;
             int piece;
             for(int i = 0; i < neighbors.Length; i++){
@@ -47,14 +46,12 @@ public class NavNodes : MonoBehaviour
                             (int)PlayerController.PlayerPosition.x + 3,
                             (int)neighbors[i].ownPosition.z,(int)PlayerController.PlayerPosition.z + 30)));
                     }
-
                     total += piece;
                     opts[j] = total;
                     options[j] = neighbors[i];
                     j += 1;
                 }
             }
-            
             //Pick a random next neighbor while taking into account the personality weighting
             System.Random rndo = new System.Random();
             int nextIndexI = rndo.Next(0,total);
@@ -84,15 +81,14 @@ public class NavNodes : MonoBehaviour
     public int personality(int enemy, NavNodes neighbor, int currX, int currZ){
         int total = 0;
         //Each personality prefers a different corner to patrol
-        // 0 prefers top right, 1 prefers top left, 2 prefers bottome left, 3 prefers bottom right
+        // 0 prefers top right, 1 prefers top left, 2 prefers bottom left, 3 prefers bottom right
         switch(enemy){
             case 0:
                 if((int)neighbor.ownPosition.x > currX || (int)neighbor.ownPosition.z > currZ){
                     total += 24;
                 }
                 else{
-                    total += 3;
-                }
+                    total += 3;}
             break;
             case 1:
                 if((int)neighbor.ownPosition.x < currX || (int)neighbor.ownPosition.z > currZ){
