@@ -14,12 +14,13 @@ public class Start_button : MonoBehaviour
 	}
     void Update()
     {
-		if(end){
-			frames +=1;
-		}
-		
-		if(frames == 60){
-			SceneManager.LoadScene(0);
+		if(Input.anyKey){
+			if(Input.inputString.Length>0){
+				Debug.Log(Input.inputString);
+				if(System.Char.IsLetter(Input.inputString[0])&& string.Equals(Input.inputString[0],'s')){
+					SceneManager.LoadScene(0);
+				}
+			}
 		}
     }
 	

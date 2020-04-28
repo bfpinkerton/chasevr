@@ -19,12 +19,22 @@ public class Instructions_button : MonoBehaviour
 	}
     void Update()
     {
-		if(end){
-			frames +=1;
-		}
+		//if(end){
+		//	frames +=1;
+	//	}
 		
-		if(frames == 60){
-			SceneManager.LoadScene(2);
+		//if(frames == 60){
+			//SceneManager.LoadScene(2);
+		//}
+		
+		
+		if(Input.anyKey){
+			if(Input.inputString.Length>0){
+				Debug.Log(Input.inputString);
+				if(System.Char.IsLetter(Input.inputString[0])&& string.Equals(Input.inputString[0],'i')){
+					SceneManager.LoadScene(2);
+				}
+			}
 		}
     }
 	
