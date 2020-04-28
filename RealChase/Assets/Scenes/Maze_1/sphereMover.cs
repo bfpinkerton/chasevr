@@ -46,44 +46,35 @@ public class sphereMover : MonoBehaviour
         }
     }
 
-    void newTarget(Collider collision){
+    void newTarget(Collider collision, bool hunt){
         //Prevent enemies from hitting the same nav node in back to back frames
-        if(prevX == (int)collision.GetComponent<NavNodes>().ownPosition.x && prevZ == (int)collision.GetComponent<NavNodes>().ownPosition.z){
+        if(prevX == (int)collision.GetComponent<NavNodes>().ownPosition.x && 
+            prevZ == (int)collision.GetComponent<NavNodes>().ownPosition.z){
             return;
         }
 
-        bool updateStart;
-        //NavNode function that returns the next target
-        Vector3 nodeTarget = collision.GetComponent<NavNodes>().GetNext(start, prevX, prevZ, personality, huntActive, out updateStart, out currX, out currZ);
-
-        //Prevents some outofrange exceptions that were occurring when a nav node is hit in back to back frames
-        if(nodeTarget.x == 0 && nodeTarget.y == 0 && nodeTarget.z == 0){
-            return;
+        bool updateStart = false;
+        Vector3 nodeTarget;
+        if(hunt){
+            //Call HuntNext function which returns closest nav node to current player's position
+            nodeTarget = collision.GetComponent<NavNodes>().HuntNext(prevX, prevZ, personality, 
+                        out currX, out currZ);
         }
-
+        else{
+            //NavNode function that returns the next target
+            nodeTarget = collision.GetComponent<NavNodes>().GetNext(start, prevX, prevZ, personality, 
+                        huntActive, out updateStart, out currX, out currZ);
+        }
+        
         //Values updated after a new target is chosen
-        start = updateStart;
+        if(start){
+            start = updateStart;
+        }
         prevX = currX;
         prevZ = currZ;
 
         //Nav nodes and enemies have different global positions but these transformations fix that
-        target = new Vector3(nodeTarget.x - 3.0f, gameObject.transform.position.y,
-                            nodeTarget.z- 29.3f);
-        nav.SetDestination(target);
-    }
-
-    void HuntNext(Collider collision){
-        if(prevX == (int)collision.GetComponent<NavNodes>().ownPosition.x && prevZ == (int)collision.GetComponent<NavNodes>().ownPosition.z){
-            return;
-        }
-
-        //Call HuntNext function which returns closest nav node to current player's position
-        Vector3 nodeTarget = collision.GetComponent<NavNodes>().HuntNext(prevX, prevZ, personality, out currX, out currZ);
-        prevX = currX;
-        prevZ = currZ;
-
         target = new Vector3(nodeTarget.x - 3.0f, gameObject.transform.position.y, nodeTarget.z- 29.3f);
-
         nav.SetDestination(target);
     }
 
@@ -104,12 +95,8 @@ public class sphereMover : MonoBehaviour
         if(collision.tag == "NavNode"){
             //Use modulus to decide when each personality should hunt
             int currTime = (int)timer % timers[timers.Length-1];
-            if(currTime >= lowtimers[personality] && currTime <= timers[personality] && huntActive){
-                HuntNext(collision);
-            }
-            else{
-                newTarget(collision);
-            }
+            bool hunt = currTime >= lowtimers[personality] && currTime <= timers[personality] && huntActive;
+            newTarget(collision, hunt);
         }
     }
 }

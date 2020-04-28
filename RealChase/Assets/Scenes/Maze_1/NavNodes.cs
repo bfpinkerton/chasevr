@@ -21,7 +21,8 @@ public class NavNodes : MonoBehaviour
 
     }
 
-    public Vector3 GetNext(bool start, int prevX, int prevZ, int enemyPerson, bool huntActive, out bool update, out int currX, out int currZ){
+    public Vector3 GetNext(bool start, int prevX, int prevZ, int enemyPerson, bool huntActive, 
+                            out bool update, out int currX, out int currZ){
         currX = (int)ownPosition.x;
         currZ = (int)ownPosition.z;
 
@@ -37,17 +38,14 @@ public class NavNodes : MonoBehaviour
             for(int i = 0; i < neighbors.Length; i++){
                 //Exclude the nav node the neemy just came from
                 if((int)neighbors[i].ownPosition.x != prevX || (int)neighbors[i].ownPosition.z != prevZ){
-                    if(j >= neighbors.Length - 1){
-                        //Sometimes the enemy hits a nav node multiple times in back to back frames and outofrange exceptions occurred
-                        Vector3 triggered = new Vector3(0,0,0);
-                        return triggered;
-                    }
                     //Call personality function to see what the weighting for this option is
                     piece = personality(enemyPerson, neighbors[i], currX, currZ);
-                    //If hunt is not active yet (game has just started) then discourage enemies from moving closer to player
+                    //If hunt is not active yet (game started < 10 seconds ago) 
+                    //then discourage enemies from moving closer to player
                     if(!huntActive){
-                        piece = piece*( (int) ( 125 / CalcEuclidean((int)neighbors[i].ownPosition.x, (int)PlayerController.PlayerPosition.x + 3,
-                            (int)neighbors[i].ownPosition.z,(int)PlayerController.PlayerPosition.z + 30) ) );
+                        piece = piece*( (int) ( 125 / CalcEuclidean((int)neighbors[i].ownPosition.x, 
+                            (int)PlayerController.PlayerPosition.x + 3,
+                            (int)neighbors[i].ownPosition.z,(int)PlayerController.PlayerPosition.z + 30)));
                     }
 
                     total += piece;
@@ -79,7 +77,8 @@ public class NavNodes : MonoBehaviour
         //Get the next position that gets you closest to the player
         currX = (int)ownPosition.x;
         currZ = (int)ownPosition.z;
-        return Euclidean((int)PlayerController.PlayerPosition.x + 3, (int)PlayerController.PlayerPosition.z + 30, prevX, prevZ);
+        return Euclidean((int)PlayerController.PlayerPosition.x + 3, 
+                (int)PlayerController.PlayerPosition.z + 30, prevX, prevZ);
     }
 
     public int personality(int enemy, NavNodes neighbor, int currX, int currZ){
@@ -129,10 +128,12 @@ public class NavNodes : MonoBehaviour
 
         double min = 1000000000;
         int minindex = 0;
-        // Go through the neighbors of the current nav node and choose the one that gets you closest to the player
+        // Go through the neighbors of the current nav node and choose the one that gets you closest to 
+        // the player
         for(int i = 0; i < neighbors.Length; i++){
             if(prevX != (int)neighbors[i].ownPosition.x || prevZ != (int)neighbors[i].ownPosition.z){
-                double eucl = CalcEuclidean(playerX, playerZ, (int)neighbors[i].ownPosition.x, (int)neighbors[i].ownPosition.z);
+                double eucl = CalcEuclidean(playerX, playerZ, (int)neighbors[i].ownPosition.x, 
+                        (int)neighbors[i].ownPosition.z);
                 if(eucl < min){
                     min = eucl;
                     minindex = i;
@@ -147,6 +148,5 @@ public class NavNodes : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider collision){
-        //Debug.Log(collision.tag);
     }
 }
