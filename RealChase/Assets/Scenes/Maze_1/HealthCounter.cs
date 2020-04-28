@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class HealthCounter : MonoBehaviour
 {
     public Text healthCounterText;
-	public static int healthCounter = 3;
+	public static int healthCounter = 1;
 	public static int sphereCounter = 0;
 	
 	
