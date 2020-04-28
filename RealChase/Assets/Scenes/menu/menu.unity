@@ -353,6 +353,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d167fa2de0b3a4145b9bcb42d295265e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  end: 0
+  frames: 0
 --- !u!1 &200285526
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,6 +1318,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5b2a57eb6c7ed49aab5f0f8d54b98c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  end: 0
+  frames: 0
 --- !u!54 &977810307
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1354,6 +1358,9 @@ MonoBehaviour:
     actionPath: /actions/default/in/TouchPad
     needsReinit: 0
   speed: 5
+  destination: {fileID: 0}
+  hit: 0
+  counter: 0
 --- !u!143 &1011659842
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2702,14 +2709,14 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2010332661}
-  m_Text: INSTRUCTIONS
+  m_Text: INSTRUCTIONS (i)
   m_OffsetZ: 0
   m_CharacterSize: 0.0625
   m_LineSpacing: 1
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 90
+  m_FontSize: 70
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: f1e676c0ae43f1f4bb7885f45c41f1cd, type: 3}
@@ -2763,7 +2770,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2010332661}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.504, y: 0.26999998, z: -0.1375122}
+  m_LocalPosition: {x: -0.5, y: 0.26999998, z: -0.1375122}
   m_LocalScale: {x: 0.23529412, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 977810305}
@@ -2998,7 +3005,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2122401202}
-  m_Text: START
+  m_Text: START (s)
   m_OffsetZ: 0
   m_CharacterSize: 0.0625
   m_LineSpacing: 1
@@ -3059,7 +3066,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2122401202}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.17411765, y: 0.26999998, z: -0.1375122}
+  m_LocalPosition: {x: -0.29, y: 0.26999998, z: -0.1375122}
   m_LocalScale: {x: 0.23529412, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 113043176}

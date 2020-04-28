@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class name_entry : MonoBehaviour
 {
 	public TextMesh Name;
@@ -41,7 +41,10 @@ public class name_entry : MonoBehaviour
 					entry = entry.Substring(0,limit-1) + blank.Substring(limit-1);
 					limit = limit - 1;
 				}
-				
+				else if(string.Equals(Input.inputString[0],'1')){
+					Debug.Log("enter");
+					SceneManager.LoadScene(1);
+				}
 			}
 		}
 		PlayerPrefs.SetString("entry", entry.ToUpper());

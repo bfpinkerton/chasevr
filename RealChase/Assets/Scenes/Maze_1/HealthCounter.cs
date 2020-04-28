@@ -12,7 +12,7 @@ public class HealthCounter : MonoBehaviour
 	
 	
 	void Start(){
-		healthCounter = 3;
+		healthCounter = 1;
 		sphereCounter = 0;
 		PlayerPrefs.SetInt("win",0);
 
@@ -20,8 +20,8 @@ public class HealthCounter : MonoBehaviour
 	
     void Update()
     {
-        healthCounterText.text = "LIVES: " + healthCounter.ToString();
-		
+       // healthCounterText.text = "LIVES: " + healthCounter.ToString();
+		healthCounterText.text = "";
 		if(healthCounter <= 0){
 			EndMessage.end = true;
 			EndMessage.mes = "GAME OVER";

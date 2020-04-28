@@ -14,12 +14,13 @@ public class BackButton : MonoBehaviour
 	}
     void Update()
     {
-		if(end){
-			frames +=1;
-		}
-		
-		if(frames == 60){
-			SceneManager.LoadScene(1);
+		if(Input.anyKey){
+			if(Input.inputString.Length>0){
+				Debug.Log(Input.inputString);
+				if(System.Char.IsLetter(Input.inputString[0])&& string.Equals(Input.inputString[0],'b')){
+					SceneManager.LoadScene(1);
+				}
+			}
 		}
     }
 	
