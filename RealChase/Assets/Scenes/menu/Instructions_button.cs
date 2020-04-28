@@ -27,7 +27,8 @@ public class Instructions_button : MonoBehaviour
 
 		if((collision.transform.name == "Player")||(collision.transform.name == "HeadCollider")||
         (collision.transform.name == "HandColliderLeft(Clone)")||(collision.transform.name == "HandColliderRight(Clone)")){
-			end = true;
+			//end = true;
+			SceneManager.LoadScene(2);
 		}
 		
 	}
