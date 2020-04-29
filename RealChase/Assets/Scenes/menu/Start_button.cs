@@ -18,7 +18,7 @@ public class Start_button : MonoBehaviour
 			if(Input.inputString.Length>0){
 				Debug.Log(Input.inputString);
 				if(System.Char.IsLetter(Input.inputString[0])&& string.Equals(Input.inputString[0],'s')){
-					SceneManager.LoadScene(0);
+					SceneManager.LoadScene(1);
 				}
 			}
 		}

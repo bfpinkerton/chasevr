@@ -18,7 +18,7 @@ public class BackButton : MonoBehaviour
 			if(Input.inputString.Length>0){
 				Debug.Log(Input.inputString);
 				if(System.Char.IsLetter(Input.inputString[0])&& string.Equals(Input.inputString[0],'b')){
-					SceneManager.LoadScene(1);
+					SceneManager.LoadScene(0);
 				}
 			}
 		}

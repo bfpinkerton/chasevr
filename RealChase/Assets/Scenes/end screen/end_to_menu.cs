@@ -28,7 +28,7 @@ public class end_to_menu : MonoBehaviour
 		}
 		
 		if(frames == 60){
-			SceneManager.LoadScene(1);
+			SceneManager.LoadScene(0);
 		}
 		if(Input.anyKey){
 			if(Input.inputString.Length>0){
